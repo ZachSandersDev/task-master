@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "src/index.ts",
   "scripts": {
-    "build": "rm -rf ./dist && tsc && cp -R ./src/templates ./dist/templates && chmod +x ./dist/index.js",
+    "build": "rm -rf ./dist && tsc && cp -R ./src/template ./dist/template && chmod +x ./dist/index.js",
     "start": "npm run build && node ./dist/index.js",
     "install": "npm run build && npm i -g"
   },
@@ -13,8 +13,11 @@
   "dependencies": {
     "@types/node": "^16.7.1",
     "@types/prompts": "^2.0.14",
+    "commander": "^8.1.0",
     "fs-extra": "^10.0.0",
+    "ora": "^5.4.1",
     "prompts": "^2.4.1",
+    "ts-node": "^10.2.1",
     "typescript": "^4.3.5"
   },
   "devDependencies": {

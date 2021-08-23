@@ -227,8 +227,8 @@ program
   .command("folder")
   .description("Opens the scripts folder")
   .action(async () => {
-    const scriptsPath = await getTaskPath("");
-    await execP(`open ${scriptsPath}`);
+    const masterPath = await getTaskMasterPath({ ensure: true });
+    await execP(`open ${masterPath}`);
   });
 
 /**
@@ -249,7 +249,24 @@ program
     let proc: ChildProcess;
 
     if (taskPath.endsWith(".ts")) {
-      proc = spawn("npx", ["ts-node", taskPath, ...process.argv.slice(3)], {
+      const masterPath = await getTaskMasterPath();
+      const distPath = path.join(masterPath, "dist");
+      const compiledPath = path.join(masterPath, "dist", `${task}.js`);
+
+      if (
+        !(await fs.pathExists(compiledPath)) ||
+        (await fs.stat(taskPath)).mtime.getTime() >
+          (await fs.stat(compiledPath)).mtime.getTime()
+      ) {
+        await execP(
+          `npx tsc ${taskPath} --outdir ${distPath} --esModuleInterop`,
+          {
+            cwd: masterPath,
+          }
+        );
+      }
+
+      proc = spawn("node", [compiledPath, ...process.argv.slice(3)], {
         stdio: "inherit",
       });
     } else {

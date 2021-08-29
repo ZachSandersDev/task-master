@@ -1,30 +1,42 @@
 # Task Master
 
-> A really simple automation tool for making Node.js scripts into commands
+A tool for making CLIs with Deno 🦕
+
+## Usage
+
+Add command `tm` to `$PATH` (only for zsh currently):
 
 ```
-  Task Master
+$ ./install.sh
+```
 
-  Version: 1.0.0
-
-  Description:
-
-    Task Master is a simple interface for making CLI's with Deno 🦕
-
-    The shorthand: "tm [task] [taskArgs...]" will also run a task
-
-  Options:
-
-    -h, --help     - Show this help.
-    -V, --version  - Show the version number for this program.
-
-  Commands:
-
-    new     [task]                - Creates a new task
-    remove  [task]                - Deletes an existing task
-    edit    [task]                - Opens a task in vscode
-    list                          - Lists all available tasks
-    folder                        - Opens the tasks folder
-    run     <task> [taskArgs...]  - Runs a task
+Create a new task:
 
 ```
+$ tm new [task]
+```
+
+Run the task:
+
+```
+$ tm [task]
+```
+
+## Options
+
+| Option          | Description               |
+| --------------- | ------------------------- |
+| `-h, --help`    | Show help menu            |
+| `-V, --version` | Prints the version number |
+
+## Commands
+
+| Command   | Arguments               | Description               |
+| --------- | ----------------------- | ------------------------- |
+| `<task>`  | `[taskArgs...] `        | Shorthand to run a task   |
+| `run`     | `<task> [taskArgs...] ` | Runs a task               |
+| `new`     | `[task]`                | Creates a new task        |
+| `edit`    | `[task]`                | Opens a task in vscode    |
+| `remove`  | `[task]`                | Deletes an existing task  |
+| `list `   |                         | Lists all available tasks |
+| `folder ` |                         | Opens the tasks folder    |

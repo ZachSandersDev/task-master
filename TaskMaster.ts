@@ -274,7 +274,7 @@ program
 
   try {
     if (!Deno.args?.length) {
-      throw "No arguments supplied to task-master";
+      await program.parse(["--help"]);
     }
 
     const task = Deno.args[0];
